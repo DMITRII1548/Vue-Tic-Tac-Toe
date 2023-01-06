@@ -1,15 +1,21 @@
 <template>
-   <div class="fields">
-        <div class="field field-1" @click="markPosition1()"><span>{{ fields.pos1 }}</span></div>
-        <div class="field field-2" @click="markPosition2()"><span>{{ fields.pos2 }}</span></div>
-        <div class="field field-3" @click="markPosition3()"><span>{{ fields.pos3 }}</span></div>
-        <div class="field field-4" @click="markPosition4()"><span>{{ fields.pos4 }}</span></div>
-        <div class="field field-5" @click="markPosition5()"><span>{{ fields.pos5 }}</span></div>
-        <div class="field field-6" @click="markPosition6()"><span>{{ fields.pos6 }}</span></div>
-        <div class="field field-7" @click="markPosition7()"><span>{{ fields.pos7 }}</span></div>
-        <div class="field field-8" @click="markPosition8()"><span>{{ fields.pos8 }}</span></div>
-        <div class="field field-9" @click="markPosition9()"><span>{{ fields.pos9 }}</span></div>
-   </div>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="fields">
+            <div class="field field-1" @click="markPosition1()"><span>{{ fields.pos1 }}</span></div>
+            <div class="field field-2" @click="markPosition2()"><span>{{ fields.pos2 }}</span></div>
+            <div class="field field-3" @click="markPosition3()"><span>{{ fields.pos3 }}</span></div>
+            <div class="field field-4" @click="markPosition4()"><span>{{ fields.pos4 }}</span></div>
+            <div class="field field-5" @click="markPosition5()"><span>{{ fields.pos5 }}</span></div>
+            <div class="field field-6" @click="markPosition6()"><span>{{ fields.pos6 }}</span></div>
+            <div class="field field-7" @click="markPosition7()"><span>{{ fields.pos7 }}</span></div>
+            <div class="field field-8" @click="markPosition8()"><span>{{ fields.pos8 }}</span></div>
+            <div class="field field-9" @click="markPosition9()"><span>{{ fields.pos9 }}</span></div>
+        </div>
+        <button @click="restart()">Restart</button>
+        <h1>Current player: {{ currentPlayer }}</h1>        
+    </div>
+
 </template>
 
 <script>
@@ -62,7 +68,8 @@ export default {
         markPosition3() {
             if (this.fields.pos3 == null) {
                 this.fields.pos3 = this.currentPlayer;
-                this.changePlayer()
+                this.changePlayer();
+                this.checkWinner();
             }
         },
 
@@ -118,7 +125,7 @@ export default {
             if (this.fields.pos1 == null || this.fields.pos2 == null || this.fields.pos2 == null) {
                 return false;
             } else if (this.fields.pos1 == this.fields.pos2 && this.fields.pos2 == this.fields.pos3) {
-                return true;
+                return this.fields.pos2;
             } else {
                 return false;
             }
@@ -128,7 +135,7 @@ export default {
             if (this.fields.pos4 == null || this.fields.pos5 == null || this.fields.pos6 == null) {
                 return false;
             } else if (this.fields.pos4 == this.fields.pos5 && this.fields.pos5 == this.fields.pos6) {
-                return true;
+                return this.fields.pos5;
             } else {
                 return false;
             }
@@ -138,7 +145,7 @@ export default {
             if (this.fields.pos7 == null || this.fields.pos8 == null || this.fields.pos9 == null) {
                 return false;
             } else if (this.fields.pos7 == this.fields.pos8 && this.fields.pos8 == this.fields.pos9) {
-                return true;
+                return this.fields.pos8;
             } else {
                 return false;
             }
@@ -148,7 +155,7 @@ export default {
             if (this.fields.pos1 == null || this.fields.pos4 == null || this.fields.pos7 == null) {
                 return false;
             } else if (this.fields.pos1 == this.fields.pos4 && this.fields.pos4 == this.fields.pos7) {
-                return true;
+                return this.fields.pos4;
             } else {
                 return false;
             }
@@ -158,7 +165,7 @@ export default {
             if (this.fields.pos2 == null || this.fields.pos5 == null || this.fields.pos8 == null) {
                 return false;
             } else if (this.fields.pos2 == this.fields.pos5 && this.fields.pos5 == this.fields.pos8) {
-                return true;
+                return this.fields.pos5;
             } else {
                 return false;
             }
@@ -168,7 +175,7 @@ export default {
             if (this.fields.pos3 == null || this.fields.pos6 == null || this.fields.pos9 == null) {
                 return false;
             } else if (this.fields.pos3 == this.fields.pos6 && this.fields.pos6 == this.fields.pos9) {
-                return true;
+                return this.fields.pos6;
             } else {
                 return false;
             }
@@ -178,7 +185,7 @@ export default {
             if (this.fields.pos1 == null || this.fields.pos5 == null || this.fields.pos9 == null) {
                 return false;
             } else if (this.fields.pos1 == this.fields.pos5 && this.fields.pos5 == this.fields.pos9) {
-                return true;
+                return this.fields.pos5;
             } else {
                 return false;
             }
@@ -187,38 +194,71 @@ export default {
         checkWinCompb8() {
             if (this.fields.pos3 == null || this.fields.pos5 == null || this.fields.pos7 == null) {
                 return false;
-            } else if (this.fields.pos4 == this.fields.pos5 && this.fields.pos5 == this.fields.pos6) {
-                return true;
+            } else if (this.fields.pos3 == this.fields.pos5 && this.fields.pos5 == this.fields.pos7) {
+                return this.fields.pos5;
             } else {
                 return false;
             }
         },
 
         checkWinner() {
-            if(this.checkWinCompb1) {
-                alert('WinnerPlayer: 1');
-            } else if (this.checkWinCompb2) {
-                alert('Winner player: 2');
-            } else if (this.checkWinCompb3) {
-                alert('Winner player: 3');
-            } else if (this.checkWinCompb4) {
-                alert('Winner player: 4');
-            } else if (this.checkWinCompb5) {
-                alert('Winner player: 5');
-            } else if (this.checkWinCompb6) {
-                alert('Winner player: 6');
-            } else if (this.checkWinCompb7) {
-                alert('Winner player: 7');
-            } else if (this.checkWinCompb8) {
-                alert('Winner player: 8');
-            }
+            setTimeout(() => {
+                if(this.checkWinCompb1()) {
+                    alert('Winner player: ' + this.checkWinCompb1());
+                    this.restart();
+                } else if (this.checkWinCompb2()) {
+                    alert('Winner player: ' + this.checkWinCompb2());
+                    this.restart();
+                } else if (this.checkWinCompb3()) {
+                    alert('Winner player: ' + this.checkWinCompb3());
+                    this.restart();
+                } else if (this.checkWinCompb4()) {
+                    alert('Winner player: ' + this.checkWinCompb4());
+                    this.restart();
+                } else if (this.checkWinCompb5()) {
+                    alert('Winner player: ' + this.checkWinCompb5());
+                    this.restart();
+                } else if (this.checkWinCompb6()) {
+                    alert('Winner player: ' + this.checkWinCompb6());
+                    this.restart();
+                } else if (this.checkWinCompb7()) {
+                    alert('Winner player: ' + this.checkWinCompb7());
+                    this.restart();
+                } else if (this.checkWinCompb8()) {
+                    alert('Winner player: ' + this.checkWinCompb8());
+                    this.restart();
+                }                 
+            }, 100);
+
+
         },
 
+        restart() {
+            this.fields.pos1 = null;
+            this.fields.pos2 = null;
+            this.fields.pos3 = null;
+            this.fields.pos4 = null;
+            this.fields.pos5 = null;
+            this.fields.pos6 = null;
+            this.fields.pos7 = null;
+            this.fields.pos8 = null;
+            this.fields.pos9 = null;
 
+            this.determineCurrentPlayer();
+        },
+
+        determineCurrentPlayer() {
+            let randValue = Math.round(Math.random());
+            if (randValue) {
+                this.currentPlayer = 'o';
+            } else {
+                this.currentPlayer = 'x';
+            }
+        }
     },
 
     mounted() {
-
+        this.determineCurrentPlayer();
     }
 }
 </script>
@@ -228,6 +268,13 @@ export default {
 
     * {
         font-family: 'Jost', sans-serif;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        align-items: center;
     }
 
     .fields {
@@ -246,6 +293,13 @@ export default {
     
     .field > span {
         font-size: 120px;      
+    }
+
+    button {
+        padding: 16px 32px;
+        border-radius: 30px; 
+        font-size: 24px;
+        width: 200px; 
     }
     
 </style>
